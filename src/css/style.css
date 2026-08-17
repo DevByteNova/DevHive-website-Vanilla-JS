@@ -1,0 +1,187 @@
+:root {
+    --black: #050505;
+    --dark: #080808;
+    --white: #ffffff;
+    --gray: #aaaaaa;
+    --cyan: #01B1E1;
+    --blue: #0111E1;
+    --blue-dark: #013F9F;
+    --red: #E13700;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background: var(--black);
+    color: var(--white);
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+a,
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+.container {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+/* Sections */
+
+section:not(.hero) {
+    opacity: 0;
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+section:not(.hero).visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Generic text */
+
+.section-tag {
+    margin-bottom: 18px;
+
+    color: var(--cyan);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.section-description {
+    color: var(--gray);
+
+    line-height: 1.7;
+}
+
+/* Buttons */
+
+.btn {
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    color: var(--white);
+
+    border: none;
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(1, 177, 225, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+/* Scroll top */
+
+.scroll-top {
+    position: fixed;
+
+    right: 30px;
+    bottom: 30px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--cyan);
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.85);
+    color: var(--cyan);
+
+    font-size: 1.3rem;
+
+    cursor: pointer;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+.scroll-top:hover {
+    background: var(--cyan);
+    color: var(--black);
+
+    transform: translateY(-4px);
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: min(100% - 30px, 1200px);
+    }
+
+    .scroll-top {
+        right: 20px;
+        bottom: 20px;
+    }
+}
