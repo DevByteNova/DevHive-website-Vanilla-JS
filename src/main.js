@@ -8,16 +8,18 @@ import "./css/projects.css";
 import "./css/contact.css";
 import "./css/footer.css";
 
+console.log("Dev-Hive JS cargado");
+
 
 // =========================
 // SCROLL ANIMATIONS
 // =========================
 
-const sections = document.querySelectorAll(
+const animatedSections = document.querySelectorAll(
     "section:not(.hero)"
 );
 
-const observer = new IntersectionObserver(
+const sectionObserver = new IntersectionObserver(
     (entries) => {
 
         entries.forEach((entry) => {
@@ -26,7 +28,7 @@ const observer = new IntersectionObserver(
 
                 entry.target.classList.add("visible");
 
-                observer.unobserve(entry.target);
+                sectionObserver.unobserve(entry.target);
 
             }
 
@@ -38,8 +40,8 @@ const observer = new IntersectionObserver(
     }
 );
 
-sections.forEach((section) => {
-    observer.observe(section);
+animatedSections.forEach((section) => {
+    sectionObserver.observe(section);
 });
 
 
@@ -127,15 +129,11 @@ if (scrollTopButton) {
 
         if (window.scrollY > 500) {
 
-            scrollTopButton.classList.add(
-                "visible"
-            );
+            scrollTopButton.classList.add("visible");
 
         } else {
 
-            scrollTopButton.classList.remove(
-                "visible"
-            );
+            scrollTopButton.classList.remove("visible");
 
         }
 
@@ -175,23 +173,38 @@ if (contactForm && formMessage) {
 
             event.preventDefault();
 
+            const nameInput =
+                document.querySelector("#name");
+
+            const emailInput =
+                document.querySelector("#email");
+
+            const messageInput =
+                document.querySelector("#message");
+
+
+            if (
+                !nameInput ||
+                !emailInput ||
+                !messageInput
+            ) {
+
+                console.error(
+                    "No se encontraron uno o más campos del formulario."
+                );
+
+                return;
+            }
+
+
             const name =
-                document
-                    .querySelector("#name")
-                    .value
-                    .trim();
+                nameInput.value.trim();
 
             const email =
-                document
-                    .querySelector("#email")
-                    .value
-                    .trim();
+                emailInput.value.trim();
 
             const message =
-                document
-                    .querySelector("#message")
-                    .value
-                    .trim();
+                messageInput.value.trim();
 
 
             if (!name || !email || !message) {
@@ -228,3 +241,26 @@ if (contactForm && formMessage) {
     );
 
 }
+// ==========================
+// SMOOTH NAVIGATION
+// ==========================
+
+const navLinks = document.querySelectorAll(
+    '.navbar a[href^="#"]'
+);
+
+navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+        const targetId =
+            link.getAttribute("href");
+        const target =
+            document.querySelector(targetId);
+        if (!target) return;
+        event.preventDefault();
+
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+});
